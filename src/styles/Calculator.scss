@@ -1,0 +1,53 @@
+@use './variables' as vars;
+
+.calc-container {
+  box-shadow: 0px 0px 20px 0px lighten(vars.$background-color, 20);
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  width: 40vw;
+  border-radius: 2px;
+}
+
+.calc-display {
+  width: 100%;
+  height: 20%;
+  background-color: lighten(vars.$digit-key-color, 10);
+  border: 1px solid black;
+}
+
+.key-container {
+  height: 80%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  border: 1px solid black;
+}
+
+.key {
+  border: 1px solid black;
+  color: vars.$font-dark;
+  font-size: 5vh;
+}
+
+.mod-key {
+  @extend .key;
+  background-color: vars.$modifier-key-color;
+}
+
+.operator-key {
+  @extend .key;
+  background-color: vars.$operator-key-color;
+  color: vars.$font-light
+}
+
+.digit-key {
+  @extend .key;
+  background-color: vars.$digit-key-color;
+}
+
+.dot-key {
+  @extend .key;
+  background-color: vars.$digit-key-color;
+}
