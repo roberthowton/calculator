@@ -98,3 +98,33 @@ test('handles divide by zero', () => {
 
   expect(screen.getByText('Err')).toBeInTheDocument();
 });
+
+test('handles percent', () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText('AC'));
+  fireEvent.click(screen.getByText('5'));
+  fireEvent.click(screen.getByText('%'));
+
+  expect(screen.getByText('0.05')).toBeInTheDocument();
+});
+
+test('handles negative numbers', () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText('AC'));
+  fireEvent.click(screen.getByText('5'));
+  fireEvent.click(screen.getByText('0'));
+  fireEvent.click(screen.getByText('±'));
+
+  expect(screen.getByText('-50')).toBeInTheDocument();
+
+  fireEvent.click(screen.getByText('±'));
+  expect(screen.getByText('50')).toBeInTheDocument();
+
+  fireEvent.click(screen.getByText('±'));
+  fireEvent.click(screen.getByText('+'));
+  fireEvent.click(screen.getByText('1'));
+  fireEvent.click(screen.getByText('0'));
+  fireEvent.click(screen.getByText('='));
+
+  expect(screen.getByText('-40')).toBeInTheDocument();
+});
