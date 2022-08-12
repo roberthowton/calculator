@@ -5,7 +5,9 @@
   display: flex;
   flex-direction: column;
   height: 70vh;
+  max-height: 700px;
   width: 40vw;
+  max-width: 570px;
   border-radius: 2px;
 }
 
@@ -19,35 +21,8 @@
 .key-container {
   height: 80%;
   width: 100%;
-  display: grid;
+  display: inline-grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 20% 20% 20% 20% 20%;
   border: 1px solid black;
-}
-
-.key {
-  border: 1px solid black;
-  color: vars.$font-dark;
-  font-size: 5vh;
-}
-
-.mod-key {
-  @extend .key;
-  background-color: vars.$modifier-key-color;
-}
-
-.operator-key {
-  @extend .key;
-  background-color: vars.$operator-key-color;
-  color: vars.$font-light
-}
-
-.digit-key {
-  @extend .key;
-  background-color: vars.$digit-key-color;
-}
-
-.dot-key {
-  @extend .key;
-  background-color: vars.$digit-key-color;
 }

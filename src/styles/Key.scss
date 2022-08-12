@@ -1,0 +1,41 @@
+@use './variables' as vars;
+
+.key {
+  border: 1px solid black;
+  color: vars.$font-dark;
+  font-size: 5vh;
+  font-weight: lighter;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    filter: brightness(60%);
+  }
+}
+
+.mod-key {
+  @extend .key;
+  background-color: vars.$modifier-key-color;
+}
+
+.operator-key {
+  @extend .key;
+  background-color: vars.$operator-key-color;
+  color: vars.$font-light
+}
+
+.digit-key {
+  @extend .key;
+  background-color: vars.$digit-key-color;
+}
+
+.dot-key {
+  @extend .key;
+  background-color: vars.$digit-key-color;
+}
+
+.zero-key {
+  @extend .digit-key;
+  grid-column: 1 / span 2;
+}
