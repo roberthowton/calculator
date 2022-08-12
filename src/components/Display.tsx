@@ -1,11 +1,23 @@
+import { CalcState } from '../hooks/calcReducer';
 import '../styles/Display.scss';
 
-interface DisplayProps {
-  value: string;
-}
+export const Display = ({
+  firstOperand,
+  secondOperand,
+  currOperand,
+  outputValue,
+}: CalcState) => {
+  const getDisplayValue = () => {
+    if (outputValue && Number(outputValue) > 0) return outputValue;
+    else if (currOperand === 'firstOperand' || !secondOperand)
+      return firstOperand || '0';
+    else return secondOperand || '0';
+  };
+  const displayValue = getDisplayValue();
 
-export const Display = ({ value }: DisplayProps) => (
-  <div className="calc-display">
-    <div>{value}</div>
-  </div>
-);
+  return (
+    <div className="calc-display">
+      <div>{displayValue}</div>
+    </div>
+  );
+};

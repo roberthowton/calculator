@@ -1,15 +1,16 @@
 import './styles/Calculator.scss';
 import { Key } from './components/Key';
 import { Display } from './components/Display';
+import {
+  calcReducer,
+  initialState,
+  CalcReducerAction,
+} from './hooks/calcReducer';
+import { SyntheticEvent, useReducer } from 'react';
 
-type keyClass =
-  | 'mod-key'
-  | 'operator-key'
-  | 'digit-key'
-  | 'dot-key'
-  | 'zero-key';
+export type KeyClass = 'mod-key' | 'operator-key' | 'digit-key' | 'zero-key';
 
-const keys: [string, keyClass][] = [
+const keys: [string, KeyClass][] = [
   ['AC', 'mod-key'],
   ['±', 'mod-key'],
   ['%', 'mod-key'],
@@ -27,11 +28,26 @@ const keys: [string, keyClass][] = [
   ['3', 'digit-key'],
   ['+', 'operator-key'],
   ['0', 'zero-key'],
-  ['.', 'dot-key'],
+  ['.', 'digit-key'],
   ['=', 'operator-key'],
 ];
 
 export const Calculator = () => {
+  const [calcState, dispatch] = useReducer(calcReducer, initialState);
+
+  const getActionType = (className: KeyClass): CalcReducerAction['type'] => {
+    if (className === 'digit-key' || className === 'zero-key')
+      return 'ENTER_DIGIT';
+    else if (className === 'operator-key') return 'ENTER_OPERATOR';
+    else return 'ENTER_MODIFIER';
+  };
+
+  const handleClick = (e: SyntheticEvent) => {
+    const type = getActionType(e.currentTarget.className as KeyClass);
+    const payload = e.currentTarget.innerHTML;
+    dispatch({ type, payload });
+  };
+
   return (
     <div
       style={{
@@ -46,10 +62,15 @@ export const Calculator = () => {
       </header>
       <main>
         <div className="calc-container">
-          <Display value={''} />
+          <Display {...calcState} />
           <div className="key-container">
             {keys.map(([keyName, className]) => (
-              <Key key={keyName} keyName={keyName} className={className} />
+              <Key
+                key={keyName}
+                keyName={keyName}
+                className={className}
+                handleClick={handleClick}
+              />
             ))}
           </div>
         </div>

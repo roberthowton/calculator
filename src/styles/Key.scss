@@ -30,11 +30,6 @@
   background-color: vars.$digit-key-color;
 }
 
-.dot-key {
-  @extend .key;
-  background-color: vars.$digit-key-color;
-}
-
 .zero-key {
   @extend .digit-key;
   grid-column: 1 / span 2;
