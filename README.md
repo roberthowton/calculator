@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-To deploy locally, clone this repo and run `yarn` to install dependences.
+To deploy locally, clone this repo, `cd` into the local directory, and run `yarn` to install dependences.
 
 ## Available Scripts
 
